@@ -33,7 +33,6 @@ func TestInsert(t *testing.T) {
 	var result = tree.InOrder()
 
 	for i := 0; i < 10; i++ {
-		tree.Insert(i)
 		assert.Equal(t, actual[i].Color, result[i].Color, "unexpected expected")
 		assert.Equal(t, actual[i].Data, result[i].Data, "unexpected expected")
 	}
@@ -41,27 +40,27 @@ func TestInsert(t *testing.T) {
 
 func TestDelete(t *testing.T) {
 	var tree = ds.New[int]()
-	tree.Insert(12)
-	tree.Insert(1)
-	tree.Insert(2)
-	tree.Insert(13)
-	tree.Insert(14)
-
-}
-
-func TestInOrder(t *testing.T) {
-
-	var tree = ds.New[int]()
-	tree.Insert(12)
-	tree.Insert(6)
-	tree.Insert(4)
-	tree.Insert(8)
-	tree.Insert(16)
-	tree.Insert(14)
-	tree.Insert(18)
-	var expected = []int{4, 6, 8, 12, 14, 16, 18}
-	var actual = tree.InOrder()
-	for i := range actual {
-		assert.Equal(t, actual[i].Data, expected[i], "fail")
+	var actual = make([]ds.RBNode[int], 0)
+	for i := 1; i <= 10; i++ {
+		tree.Insert(i)
 	}
+	tree.Remove(6)
+	tree.Remove(4)
+
+	actual = append(actual, ds.RBNode[int]{Data: 1, Color: ds.RED})
+	actual = append(actual, ds.RBNode[int]{Data: 2, Color: ds.BLACK})
+	actual = append(actual, ds.RBNode[int]{Data: 3, Color: ds.BLACK})
+	actual = append(actual, ds.RBNode[int]{Data: 5, Color: ds.BLACK})
+	actual = append(actual, ds.RBNode[int]{Data: 7, Color: ds.RED})
+	actual = append(actual, ds.RBNode[int]{Data: 8, Color: ds.RED})
+	actual = append(actual, ds.RBNode[int]{Data: 9, Color: ds.BLACK})
+	actual = append(actual, ds.RBNode[int]{Data: 10, Color: ds.RED})
+
+	var result = tree.InOrder()
+
+	for i := 0; i < 8; i++ {
+		assert.Equal(t, actual[i].Color, result[i].Color, "unexpected expected")
+		assert.Equal(t, actual[i].Data, result[i].Data, "unexpected expected")
+	}
+
 }

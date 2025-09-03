@@ -1,4 +1,4 @@
-package ds
+package rbtree
 
 import "golang.org/x/exp/constraints"
 
@@ -18,9 +18,9 @@ func (t *RBTree[T]) Insert(data T) {
 }
 
 func (t *RBTree[T]) Remove(data T) {
-	var ok *bool
-	*ok = false
-	t.root = t.root.delete(data, ok)
+	var ok bool = false
+	t.root = t.root.delete(data, &ok)
+	t.root.color = BLACK
 }
 
 func (t *RBTree[T]) Search(data T) bool {

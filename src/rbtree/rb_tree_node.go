@@ -1,4 +1,4 @@
-package ds
+package rbtree
 
 import "golang.org/x/exp/constraints"
 
@@ -158,7 +158,7 @@ func (t *rbTreeNode[T]) edge(path *[]*rbTreeNode[T], dir Direction) {
 	if t.child[dir] == nil {
 		*path = append(*path, t)
 	} else {
-		t.edge(path, dir)
+		t.child[dir].edge(path, dir)
 	}
 }
 

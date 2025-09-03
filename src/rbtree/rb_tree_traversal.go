@@ -1,4 +1,4 @@
-package ds
+package rbtree
 
 import (
 	"golang.org/x/exp/constraints"

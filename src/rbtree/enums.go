@@ -1,4 +1,4 @@
-package ds
+package rbtree
 
 type NodeColor int
 type Direction int
