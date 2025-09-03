@@ -73,12 +73,11 @@ func (t *rbTreeNode[T]) delete(data T, ok *bool) *rbTreeNode[T] {
 		return t
 	}
 	if t.data == data {
-		if t.child[LEFT] == nil || t.child[RIGHT] == nil {
 
-			var temp *rbTreeNode[T] = nil
-			if t.child[LEFT] != nil {
-				temp = t.child[LEFT]
-			}
+		if t.child[LEFT] == nil || t.child[RIGHT] == nil {
+			//Node to be removed has only one child
+
+			var temp *rbTreeNode[T] = t.child[LEFT]
 			if t.child[RIGHT] != nil {
 				temp = t.child[RIGHT]
 			}
@@ -91,6 +90,7 @@ func (t *rbTreeNode[T]) delete(data T, ok *bool) *rbTreeNode[T] {
 			t = nil
 			return temp
 		} else {
+			//Node has no children, move its data to the rightmost of the left to make it leaf and remove it
 			var tt []*rbTreeNode[T] = make([]*rbTreeNode[T], 0)
 			t.child[LEFT].edge(&tt, RIGHT)
 			var temp *rbTreeNode[T] = tt[len(tt)-1]
