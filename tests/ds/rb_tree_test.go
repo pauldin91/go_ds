@@ -46,19 +46,19 @@ func TestDelete(t *testing.T) {
 	}
 	tree.Remove(6)
 	tree.Remove(4)
+	tree.Remove(10)
+	tree.Remove(8)
 
 	actual = append(actual, ds.RBNode[int]{Data: 1, Color: ds.RED})
 	actual = append(actual, ds.RBNode[int]{Data: 2, Color: ds.BLACK})
 	actual = append(actual, ds.RBNode[int]{Data: 3, Color: ds.BLACK})
 	actual = append(actual, ds.RBNode[int]{Data: 5, Color: ds.BLACK})
 	actual = append(actual, ds.RBNode[int]{Data: 7, Color: ds.RED})
-	actual = append(actual, ds.RBNode[int]{Data: 8, Color: ds.RED})
 	actual = append(actual, ds.RBNode[int]{Data: 9, Color: ds.BLACK})
-	actual = append(actual, ds.RBNode[int]{Data: 10, Color: ds.RED})
 
 	var result = tree.InOrder()
 
-	for i := 0; i < 8; i++ {
+	for i := 0; i < 6; i++ {
 		assert.Equal(t, actual[i].Color, result[i].Color, "unexpected expected")
 		assert.Equal(t, actual[i].Data, result[i].Data, "unexpected expected")
 	}
