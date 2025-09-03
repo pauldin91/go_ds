@@ -33,21 +33,24 @@ func (t *rbTreeNode[T]) insert(data T) *rbTreeNode[T] {
 }
 
 func (t *rbTreeNode[T]) insertRebalance(dir Direction) *rbTreeNode[T] {
-	if t.child[dir].isRed() {
-		//siblings are RED
-		if t.child[1-dir].isRed() {
-			//exists grandchild RED
-			if t.child[dir].child[dir].isRed() ||
-				t.child[dir].child[1-dir].isRed() {
-				t.colorFlip()
-			}
-		} else {
-			if t.child[dir].child[dir].isRed() {
-				t = t.rotate(1 - dir)
-			} else if t.child[dir].child[1-dir].isRed() {
-				t = t.doubleRotate(1 - dir)
-			}
-		}
+	var siblingsAreRed bool = t.child[dir].isRed() && t.child[1-dir].isRed()
+	var sameSideChildIsRedOnly bool = t.child[dir].isRed() && !t.child[1-dir].isRed()
+	var sameSideEitherGrandchildIsRed bool = t.child[dir].child[dir].isRed() || t.child[dir].child[1-dir].isRed()
+	var sameSideGrandchildIsRedOnly bool = t.child[dir].child[dir].isRed()
+	var oppositeSideGrandchildIsRedOnly bool = t.child[dir].child[1-dir].isRed()
+
+	if siblingsAreRed && sameSideEitherGrandchildIsRed {
+		//Case 1. children are RED and at the insertion side there is RED grandchild
+		t.colorFlip()
+	} else if sameSideChildIsRedOnly && sameSideGrandchildIsRedOnly {
+
+		//Case 2.1 same side child and grandchild are RED (R-R property violation)
+		t = t.rotate(1 - dir)
+
+	} else if sameSideChildIsRedOnly && oppositeSideGrandchildIsRedOnly {
+		//Case 2.2 same side child is RED whose opposite side grandchild is RED (R-R property violation)
+		//align first rotating to the opposite side the child, then rotate to the same side the parent
+		t = t.doubleRotate(1 - dir)
 	}
 	return t
 }
