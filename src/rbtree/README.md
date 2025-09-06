@@ -5,16 +5,16 @@
         x                 y
        / \               / \
       y   ?   --->      a   x
-     / \		         / \
-    a   b		        b   ?
+     / \		   / \
+    a   b		  b   ?
 
 ## case 2
 
         x                 y
        / \               / \
       y   b   --->      a   x
-     / \		         / \
-    a   ?		        ?   b
+     / \		   / \
+    a   ?		  ?   b
 
 # leftRotation(x) --> lean to left subtree (counterclockwise rotation)
 
