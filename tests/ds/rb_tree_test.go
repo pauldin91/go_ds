@@ -3,7 +3,7 @@ package ds_tests
 import (
 	"testing"
 
-	ds "github.com/pauldin91/go_ds/src/rbtree"
+	ds "github.com/pauldin91/go_ds/src/ds/rbtree"
 	"gotest.tools/v3/assert"
 )
 

@@ -1,7 +1,7 @@
 package go_ds
 
 import (
-	rbtree "github.com/pauldin91/go_ds/src/rbtree"
+	rbtree "github.com/pauldin91/go_ds/src/ds/rbtree"
 	"golang.org/x/exp/constraints"
 )
 
