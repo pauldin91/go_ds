@@ -17,3 +17,9 @@ func Filter[T any](src []T, filter func(T) bool) []T {
 	}
 	return result
 }
+
+func Reduce[T any](src []T, reduce func(T)) {
+	for _, e := range src {
+		reduce(e)
+	}
+}
