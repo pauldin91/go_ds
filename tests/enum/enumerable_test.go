@@ -47,5 +47,38 @@ func TestReduce(t *testing.T) {
 			t.Errorf("Found at %.2f : %.2f", i, s)
 		}
 	}
+}
 
+func TestValidSkip(t *testing.T) {
+	var skiped []float32 = enum.Skip(data, 3)
+	var expected []float32 = []float32{0.9, 0.95, 0.99}
+	for i, s := range skiped {
+		if s != expected[i] {
+			t.Errorf("Found at %d : %.2f instead of %.2f\n", i, s, expected[i])
+		}
+	}
+}
+func TestInvalidSkip(t *testing.T) {
+	var skiped []float32 = enum.Skip(data, 7)
+	if len(skiped) != 0 {
+		t.Errorf("Should be empty\n")
+	}
+}
+
+func TestTake(t *testing.T) {
+	var take []float32 = enum.Take(data, 3)
+	var expected []float32 = []float32{0.01, 0.05, 0.1}
+	for i, s := range take {
+		if s != expected[i] {
+			t.Errorf("Found at %d : %.2f instead of %.2f\n", i, s, expected[i])
+		}
+	}
+}
+func TestInvalidTake(t *testing.T) {
+	var take []float32 = enum.Take(data, 7)
+	for i, s := range take {
+		if s != data[i] {
+			t.Errorf("Found at %d : %.2f instead of %.2f\n", i, s, data[i])
+		}
+	}
 }

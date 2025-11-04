@@ -23,3 +23,17 @@ func Reduce[T any](src []T, reduce func(T)) {
 		reduce(e)
 	}
 }
+
+func Skip[T any](src []T, skip int) []T {
+	if len(src) > skip {
+		return src[skip : len(src)-1]
+	}
+	return make([]T, 0)
+}
+
+func Take[T any](src []T, take int) []T {
+	if len(src) > take {
+		return src[0:take]
+	}
+	return src
+}
